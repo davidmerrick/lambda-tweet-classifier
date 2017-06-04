@@ -1,4 +1,4 @@
-var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
+import NaturalLanguageUnderstandingV1 from 'watson-developer-cloud/natural-language-understanding/v1';
 
 class ClassifierUtils {
 
