@@ -5,6 +5,7 @@
   "author": "David Merrick",
   "dependencies": {
     "async": "^2.4.1",
+    "babel-preset-es2016": "^6.24.1",
     "twitter": "^1.7.0",
     "watson-developer-cloud": "^2.32.1"
   },
