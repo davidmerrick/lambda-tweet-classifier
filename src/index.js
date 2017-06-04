@@ -1,26 +1,21 @@
-var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
+import ClassifierUtils from '../src/utils/ClassifierUtils'
+import TwitterUtils from '../src/utils/TwitterUtils'
 
-exports.handler = function index(event, context, callback){
-    const nlu = new NaturalLanguageUnderstandingV1({
-        username: process.env.USERNAME,
-        password: process.env.PASSWORD,
-        version_date: NaturalLanguageUnderstandingV1.VERSION_DATE_2017_02_27
-    });
-
-
-    let params = {
-        html: event.html,
-        'features': {
-            'sentiment': {},
-            'categories': {}
+exports.handler = async function index(event, context, callback){
+    let screenName = event.screen_name || process.env.SCREEN_NAME;
+    let tweets = await TwitterUtils.getTweets(screenName);
+    let filteredTweets = TwitterUtils.filterOutRetweets(tweets);
+    let foundTweet;
+    for(var i = 0; i < filteredTweets.length; i++){
+        let tweet = filteredTweets[i];
+        let classification = await ClassifierUtils.classifyText(tweet.text);
+        let foundCategory = classification.categories.find(category => category.label.indexOf(event.category) != -1);
+        let sentimentLabel = classification.sentiment.document.label;
+        let matches = foundCategory != null && sentimentLabel === event.sentimentLabel;
+        if(matches){
+            foundTweet = filteredTweets[i];
+            break;
         }
-    };
-
-    nlu.analyze(params, (error, response) => {
-        if(error){
-            return callback(error);
-        }
-
-        return callback(null, response);
-    });
+    }
+    callback(null, foundTweet);
 }
