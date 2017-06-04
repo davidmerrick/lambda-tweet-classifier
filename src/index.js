@@ -1,7 +1,7 @@
 import ClassifierUtils from '../src/utils/ClassifierUtils'
 import TwitterUtils from '../src/utils/TwitterUtils'
 
-exports.handler = async function index(event, context, callback){
+var index = async (event, context, callback) => {
     let {category, sentimentLabel} = event;
     if(!category || !sentimentLabel){
         return callback(new Error("Please specify category and sentimentLabel"));
@@ -24,3 +24,5 @@ exports.handler = async function index(event, context, callback){
     }
     callback(null, foundTweet);
 }
+
+exports.handler = index;
