@@ -23,7 +23,7 @@ var index = async (event, context, callback) => {
             break;
         }
     }
-    callback(null, foundTweet);
+    callback(null, JSON.stringify(foundTweet));
 }
 
 exports.handler = index;
