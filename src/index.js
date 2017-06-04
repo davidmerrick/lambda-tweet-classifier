@@ -1,5 +1,6 @@
 import ClassifierUtils from './utils/ClassifierUtils'
 import TwitterUtils from './utils/TwitterUtils'
+import regeneratorRuntime from 'regenerator-runtime' // Important! This needs to be imported here for Babel to transpile correctly.
 
 var index = async (event, context, callback) => {
     let {category, sentimentLabel} = event;
