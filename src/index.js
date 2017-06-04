@@ -1,5 +1,5 @@
-import ClassifierUtils from '../src/utils/ClassifierUtils'
-import TwitterUtils from '../src/utils/TwitterUtils'
+import ClassifierUtils from './utils/ClassifierUtils'
+import TwitterUtils from './utils/TwitterUtils'
 
 var index = async (event, context, callback) => {
     let {category, sentimentLabel} = event;
