@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/davidmerrick/lambda-tweet-classifier.svg?branch=master)](https://travis-ci.org/davidmerrick/lambda-tweet-classifier)
-
 Lambda function which uses IBM Watson to classifiy text. 
 
 ## Reference
